@@ -8,6 +8,8 @@ Some features that include are:
 - Search Functionality search any city of your choice.
 - See the location of the city via Google Maps
 
+Link: https://weather-app-7zt.pages.dev/
+
 ## Getting Started
 1. Clone this repository.
 2. Install dependencies using `npm install`.
