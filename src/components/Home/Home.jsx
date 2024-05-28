@@ -1,6 +1,6 @@
 import { Search } from "./Search";
 import { Table } from "./Table";
-import { SearchContextProvider } from "../context";
+import { SearchContextProvider } from "../Context/SearchContext";
 
 export const Home = () => {
     return (

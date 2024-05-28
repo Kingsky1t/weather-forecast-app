@@ -1,23 +1,26 @@
 /* eslint-disable react/prop-types */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UnitContext } from "../Context/UnitContext";
 
 export const ForecastCard = ({ lon, lat }) => {
+  const {unit} = useContext(UnitContext)
   const [forecastData, setForecastData] = useState(null);
   const [forecastList, setForecastList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const unitString = ['', '&units=metric', '&units=imperial'][unit]
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=526c0f74c869536bf114aa74ba0955dd&units=metric`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=526c0f74c869536bf114aa74ba0955dd${unitString}`
       )
       .then((res) => {
         setForecastData(res.data);
         setLoading(false);
       })
       .catch((err) => console.error(err));
-  }, [lat, lon]);
+  }, [lat, lon, unit]);
 
   useEffect(() => {
     if (forecastData) {
@@ -63,8 +66,8 @@ export const ForecastCard = ({ lon, lat }) => {
           >
             <p><b>{item.day}</b></p>
             <img src={`https://openweathermap.org/img/wn/${item.mainWeather}.png`} alt={item.mainWeather} />
-            <p><b>{item.maxTemp}°C</b></p>
-            <p>{item.minTemp}°C</p>
+            <p><b>{item.maxTemp}{["K", "°C", "°F"][unit]}</b></p>
+            <p>{item.minTemp}{["K", "°C", "°F"][unit]}</p>
           </div>
         ))}
     </div>

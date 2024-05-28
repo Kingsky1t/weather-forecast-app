@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { SearchContext } from "../context";
+import { SearchContext } from "../Context/SearchContext";
 
 const TABLE_HEAD = ["CITY", "COUNTRY", "TIME ZONE"];
 

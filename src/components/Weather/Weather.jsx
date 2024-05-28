@@ -1,31 +1,33 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ForecastCard } from "./ForecastCard";
 import { images } from "../../assets";
+import { ChangeUnit } from "./ChangeUnit";
+import { UnitContext } from "../Context/UnitContext";
 
 export const Weather = () => {
+  const { unit } = useContext(UnitContext);
   const { state } = useLocation();
   const [weather, setWeather] = useState({});
-
   const [loading, setLoading] = useState(true);
-  console.log(weather);
+
   useEffect(() => {
+    const unitString = ["", "&units=metric", "&units=imperial"][unit];
     axios
       .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${state.lat}&lon=${state.lon}&appid=526c0f74c869536bf114aa74ba0955dd&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${state.lat}&lon=${state.lon}&appid=526c0f74c869536bf114aa74ba0955dd${unitString}`
       )
       .then((res) => {
         setWeather(res.data);
         setLoading(false);
       })
       .catch((err) => console.error(err));
-  }, []);
-
-  useEffect(() => {}, []);
+  }, [state, unit]);
 
   return (
-    <div className="flex h-screen justify-center items-center bg-gradient-to-br from-cyan-400 to-blue-700">
+    <div className="flex flex-col h-screen justify-center items-center bg-gradient-to-br from-cyan-400 to-blue-700">
+      <ChangeUnit />
       <div className="flex flex-col w-1/2 p-4 shadow-3xl bg-sky-500 text-white">
         {/* weather  */}
         {loading ? (
@@ -38,9 +40,7 @@ export const Weather = () => {
                 alt=""
               />
 
-              <p className=" font-bold text-5xl text-center">
-                {state.name}
-              </p>
+              <p className=" font-bold text-5xl text-center">{state.name}</p>
 
               {/* google location */}
               <div className="self-start">
@@ -48,30 +48,37 @@ export const Weather = () => {
                   href={`https://www.google.com/maps/@${state.lat},${state.lon},10z?entry=ttu`}
                   target="_blank"
                 >
-                  <img src={images.map} alt="location" className="w-6 h-6 m-1"/>
+                  <img
+                    src={images.map}
+                    alt="location"
+                    className="w-6 h-6 m-1"
+                  />
                 </a>
               </div>
             </div>
 
-            <div className="flex flex-col ">
-              <p className=" text-6xl text-center">{weather.main.temp}<sup className="text-2xl">°C</sup></p>
+            <div className="flex flex-col gap-1 ">
+              <p className=" text-6xl text-center flex gap-1">
+                {weather.main.temp}
+                <sup className="text-4xl">{["K", "°C", "°F"][unit]}</sup>
+              </p>
 
               <p className=" text-xl">
                 <b>{weather.weather[0].description.toUpperCase()}</b>
               </p>
-              
+
               <p className=" text-xl flex gap-2 items-center">
-                <img src={images.humidity} className="w-6 inline"/>
+                <img src={images.humidity} className="w-6 inline" />
                 Humidity: {weather.main.humidity}%
               </p>
 
               <p className=" text-xl flex gap-2 items-center">
-                <img src={images.wind} className="w-6 inline "/>
-                Wind Speed: {weather.wind.speed} m/s
+                <img src={images.wind} className="w-6 inline " />
+                Wind Speed: {weather.wind.speed} {["m/s", "m/s", "mph"][unit]}
               </p>
 
               <p className=" text-xl flex gap-2 items-center">
-                <img src={images.pressure} className="w-6 inline"/>
+                <img src={images.pressure} className="w-6 inline" />
                 Atm. Pressure: {weather.main.pressure} hPa
               </p>
             </div>

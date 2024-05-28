@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { SearchContext } from "../context";
+import { SearchContext } from "../Context/SearchContext";
 
 export const Search = () => {
     const { setSearchedCities } = useContext(SearchContext);
