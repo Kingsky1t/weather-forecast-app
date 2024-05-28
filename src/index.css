@@ -7,6 +7,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+input {
+  padding-left: 1rem;
+  font-family: "Roboto", sans-serif;
+}
+
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
     width: 15px;
@@ -14,17 +19,19 @@ body {
   }
 
   .scrollbar::-webkit-scrollbar-track {
+    margin-block: 5px;
     border-radius: 100vh;
     background: #f7f4ed;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    background: rgb(96 165 250);
+    background: #5AB2FF;
     border-radius: 100vh;
     border: 1px solid #f6f7ed;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgb(56 189 248);
+    background: #A0DEFF;
+    border: 1px solid #5AB2FF;
   }
 }

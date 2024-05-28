@@ -27,9 +27,9 @@ export const Search = () => {
     }, [search]);
 
     return (
-        <div className='py-4 bg-sky-950 flex'>
+        <div className='py-4 flex'>
             <input
-            className="m-auto h-10 w-1/3 outline-none text-lg bg-white px-2"
+            className="rounded m-auto h-10 w-1/3 outline-none text-lg bg-white"
                 type='text'
                 value={search}
                 onChange={(e) => {
