@@ -7,6 +7,7 @@ Some features that include are:
 - Unit change option (e.g., Celsius, Fahrenheit).
 - Search Functionality search any city of your choice.
 - See the location of the city via Google Maps
+- History record for searched cities
 
 Link: https://weather-app-7zt.pages.dev/
 
@@ -18,5 +19,7 @@ Link: https://weather-app-7zt.pages.dev/
 5. Access the app in your browser at `http://localhost:5173`.
 
 ## Screenshots
-![image](https://github.com/Kingsky1t/weather-forecast-app/assets/79399986/10243c45-972c-46a1-a03e-5dbce3331e47)
-![image](https://github.com/Kingsky1t/weather-forecast-app/assets/79399986/4897d746-3324-47f1-a0ff-e0ce7268c636)
+
+![image](https://github.com/Kingsky1t/weather-forecast-app/assets/79399986/52221b2b-e346-4d70-b726-32d3d8a2db88)
+![image](https://github.com/Kingsky1t/weather-forecast-app/assets/79399986/6329e5f7-1bd8-4f42-9d5c-3277631aefdf)
+
