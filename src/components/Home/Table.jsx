@@ -3,10 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { SearchContext } from "../Context/SearchContext";
+import { HistoryContext } from "../Context/HistoryContext";
 
 const TABLE_HEAD = ["CITY", "COUNTRY", "TIME ZONE"];
 
 export function Table() {
+  const { history, setHistory } = useContext(HistoryContext);
   const { searchedCities } = useContext(SearchContext);
   const navigate = useNavigate();
   const [cities, setCities] = useState([]);
@@ -45,14 +47,23 @@ export function Table() {
     }
   }, [searchedCities]);
 
+  const handleClick = (item) => {
+    setHistory((prev) => [
+      ...prev,
+      { id: item.geoname_id, name: item.name, ...item.coordinates },
+    ]);
+
+    navigate("/weather", {
+      state: { ...item.coordinates, name: item.name },
+    });
+  };
+
   return (
     <div className="relative w-4/5 h-3/4 mx-auto my-4 ">
-      <div className="grid grid-cols-3 bg-sky-500 shadow-xl text-white rounded py-4">
+      <div className="grid grid-cols-3 bg-blue-500 shadow-xl text-white rounded py-4">
         {TABLE_HEAD.map((head) => (
           <div key={head}>
-            <p className="-ml-4 font-bold  text-xl text-center">
-              {head}
-            </p>
+            <p className="-ml-4 font-bold  text-xl text-center">{head}</p>
           </div>
         ))}
       </div>
@@ -70,12 +81,8 @@ export function Table() {
               className="grid grid-cols-3 py-1  p-1 my-2"
             >
               <p
-                className="rounded text-xl bg-white p-2 m-1 text-center cursor-pointer hover:bg-sky-700 hover:text-white transition-colors"
-                onClick={() => {
-                  navigate("/weather", {
-                    state: { ...item.coordinates, name: item.name },
-                  });
-                }}
+                className="rounded text-xl bg-white p-2 m-1 text-center cursor-pointer hover:bg-blue-600 hover:text-white transition-colors"
+                onClick={() => handleClick(item)}
               >
                 {item.name}
               </p>

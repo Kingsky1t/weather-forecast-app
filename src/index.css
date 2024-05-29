@@ -14,25 +14,24 @@ input {
 
 @layer utilities {
   .scrollbar::-webkit-scrollbar {
-    width: 15px;
-    height: 15px;
+    width: 10px;
   }
 
   .scrollbar::-webkit-scrollbar-track {
     margin-block: 5px;
     border-radius: 100vh;
-    background: #f7f4ed;
+    background: white;
   }
 
   .scrollbar::-webkit-scrollbar-thumb {
-    background: #5AB2FF;
+    background-color: rgb(37 99 235);
     border-radius: 100vh;
-    border: 1px solid #f6f7ed;
+    border: 1px solid white;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #A0DEFF;
-    border: 1px solid #5AB2FF;
+    background-color: rgb(29 78 216);
+    border: 1px solid white;
   }
 }
 

@@ -28,7 +28,7 @@ export const Weather = () => {
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-gradient-to-br from-cyan-400 to-blue-700">
       <ChangeUnit />
-      <div className="flex flex-col w-1/2 p-4 shadow-3xl bg-sky-500 text-white">
+      <div className="flex flex-col w-1/2 p-4 shadow-3xl bg-blue-500 text-white">
         {/* weather  */}
         {loading ? (
           <h1>loading...</h1>
